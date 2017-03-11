@@ -1,4 +1,4 @@
-/*
+﻿/*
     Marcin Słowiak
     *rozwiązanie zadania nr. 5136 - http://pl.spoj.com/problems/WZP09_2F/
 */
@@ -8,65 +8,35 @@ import java.util.*;
 public class Main {
     public static Scanner in = new Scanner(System.in);
 
-    public static void convertTime(int hour, int minutes){
-        String output = "";
-        if(hour < 10){
-            output = output + ",0" + hour + ":";
-        }else if (hour == 0){
-            output = output + ",00" + ":";
-        }else{
-            output = output + "," + hour + ":";
+    public static boolean divideFive(String n){
+        if(n.length()>1) {
+            if (n.charAt(n.length() - 1) == '0' || n.charAt(n.length() - 1) == '5') {
+                return true;
+            }
         }
-
-        if(minutes < 10){
-            output = output + "0" + minutes;
-        }else if (minutes == 0){
-            output = output + "00";
-        }else{
-            output = output + minutes;
-        }
-        System.out.print(output);
+        return false;
     }
 
-    public static int[] addTime(int hour, int minutes, int add){
-        if(minutes+add >= 60){
-            if(hour+(minutes+add)/60 >= 24){
-                hour = (hour + (minutes+add)/60) % 24;
-            }else{
-                hour = hour + (minutes+add)/60;
-            }
-            minutes = (minutes + add) % 60;
-        }else{
-            minutes = minutes + add;
+    public static boolean divideThree(String n){
+        int sum = 0;
+        for(int i=0; i<n.length(); ++i){
+            sum = sum + (n.charAt(i)-48);
         }
-        int [] array = new int[2];
-
-        array[0] = hour;
-        array[1] = minutes;
-
-        return array;
+        if(sum % 3 == 0){
+            return true;
+        }
+        return false;
     }
 
     public static void main(String[] args){
-        String time = in.nextLine();
-        List<Integer> breaks = new ArrayList<Integer>();
-        while(in.hasNext()){
-            breaks.add(in.nextInt());
+        String n = in.nextLine();
+        while(!n.equals("0")){
+            if(divideFive(n) && divideThree(n)){
+                System.out.println("TAK");
+            }else{
+                System.out.println("NIE");
+            }
+            n = in.nextLine();
         }
-        int [] out = new int[2];
-        out[0] = Integer.parseInt(time.substring(0,2));
-        out[1] = Integer.parseInt(time.substring(3));
-
-        System.out.print(time);
-        for(int i=0; i<breaks.size(); ++i){
-
-            out = addTime(out[0], out[1], 45);
-            convertTime(out[0], out[1]);
-
-            out = addTime(out[0], out[1], breaks.get(i));
-            convertTime(out[0], out[1]);
-        }
-        out = addTime(out[0], out[1], 45);
-        convertTime(out[0], out[1]);
     }
 }
