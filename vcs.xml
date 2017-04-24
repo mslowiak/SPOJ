@@ -26,8 +26,12 @@
           <option name="url" value="https://github.com/mq007/netKnow.git" />
           <option name="userName" value="" />
         </UrlAndUserName>
+        <UrlAndUserName>
+          <option name="url" value="https://github.com/mq007/netKnowApp.git" />
+          <option name="userName" value="" />
+        </UrlAndUserName>
       </list>
     </option>
-    <option name="cloneParentDir" value="D:\INTELIJ\" />
+    <option name="cloneParentDir" value="D:\" />
   </component>
 </application>
